@@ -1,0 +1,6 @@
+export const xs = '4px'
+export const s = '8px'
+export const m = '12px'
+export const l = '16px'
+export const xl = '24px'
+export const xxl = '32px'
