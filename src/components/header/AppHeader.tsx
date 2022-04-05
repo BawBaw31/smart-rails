@@ -1,3 +1,5 @@
+import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { useState } from 'react'
 import {
     NativeSyntheticEvent,
@@ -5,6 +7,7 @@ import {
     TouchableOpacity,
 } from 'react-native'
 import SearchIcon from '../../assets/icons/SearchIcon'
+import { RouteParams } from '../../navigation/RootNavigator'
 import * as Styled from './AppHeader.styles'
 
 export const SearchHeader = () => {
@@ -35,12 +38,13 @@ interface TitleHeaderProps {
 }
 
 export const TitleHeader = ({ title }: TitleHeaderProps) => {
+    const navigation = useNavigation<NativeStackNavigationProp<RouteParams>>()
+
     return (
         <Styled.AppHeaderContainer>
             <TouchableOpacity
                 onPress={() => {
-                    console.log('back clicked')
-                    // navigation.navigate('')
+                    navigation.canGoBack() ? navigation.goBack() : navigation.navigate('Home')
                 }}
             >
                 <Styled.BackArrow />

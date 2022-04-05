@@ -7,9 +7,11 @@ import { Home } from '../screens/Home/Home'
 import { Loading } from '../screens/Loading/Loading'
 import { Register } from '../screens/Register/Register'
 import { SignIn } from '../screens/SignIn/SignIn'
+import { TestPdf } from '../screens/Pdfs/TestPdf'
 
 export type RouteParams = {
     Home: undefined
+    TestPdf: undefined
     Loading: undefined
     Register: undefined
     SignIn: undefined
@@ -45,6 +47,7 @@ export const RootNavigator = () => {
             ) : isSignedIn ? (
                 <Stack.Group>
                     <Stack.Screen name="Home" component={Home} />
+                    <Stack.Screen name="TestPdf" component={TestPdf} />
                 </Stack.Group>
             ) : (
                 <Stack.Group>
