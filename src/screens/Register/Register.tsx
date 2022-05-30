@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
-import { Text, TextInput, Button } from 'react-native'
-import { DisconnectedLayout } from '../../components/layouts/Layouts'
-import { auth } from '../../firebase/firebase-setup'
-import { getDatabase, ref, set } from 'firebase/database'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { RouteParams } from '../../navigation/RootNavigator'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { getDatabase, ref, set } from 'firebase/database'
+import React, { useState } from 'react'
+import { Button, TextInput } from 'react-native'
+import { TitleLayout } from '../../components/layouts/Layouts'
+import { auth } from '../../firebase/firebase-setup'
+import { RouteParams } from '../../navigation/RootNavigator'
 
 export const Register = () => {
     const navigation = useNavigation<NativeStackNavigationProp<RouteParams>>()
@@ -29,9 +29,8 @@ export const Register = () => {
     }
 
     return (
-        <DisconnectedLayout>
+        <TitleLayout noFooter title={'Register'}>
             <>
-                <Text>Register</Text>
                 <TextInput
                     placeholder="Email"
                     value={email}
@@ -47,6 +46,6 @@ export const Register = () => {
                 <Button title="Submit" onPress={RegisterUser} />
                 <Button title="Sign in" onPress={() => navigation.navigate('SignIn')} />
             </>
-        </DisconnectedLayout>
+        </TitleLayout>
     )
 }

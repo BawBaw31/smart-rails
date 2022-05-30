@@ -1,22 +1,24 @@
+import * as Print from 'expo-print'
+import * as Sharing from 'expo-sharing'
 import React, { useState } from 'react'
 import { CustomButton } from '../../components/formField/FormField'
 import * as StyledForm from '../../components/formField/FormField.styles'
 import { TitleLayout } from '../../components/layouts/Layouts'
 import { Colors } from '../../styles'
-import * as Print from 'expo-print'
-import * as Sharing from 'expo-sharing'
 
-export const TestPdf = () => {
+export const WayDevicesPDF = () => {
     const [name, setName] = useState('')
 
     const onSubmit = async () => {
-        const html = `<h1> ${name} </h1>`
+        const html = `
+            <h1>Visite périodique des appareils de voie : </h1>
+            <p>${name}</p>`
         const { uri } = await Print.printToFileAsync({ html })
         Sharing.shareAsync(uri)
     }
 
     return (
-        <TitleLayout title="Create PDF">
+        <TitleLayout title="Create PDF" goBack="Home" noFooter>
             <>
                 <StyledForm.CustomTextInput
                     placeholder="Title"

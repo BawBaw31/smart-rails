@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import { Text, TextInput, Button } from 'react-native'
-import { DisconnectedLayout } from '../../components/layouts/Layouts'
-import { auth } from '../../firebase/firebase-setup'
-import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import React, { useState } from 'react'
+import { Button, Text, TextInput } from 'react-native'
+import { TitleLayout } from '../../components/layouts/Layouts'
+import { auth } from '../../firebase/firebase-setup'
 import { RouteParams } from '../../navigation/RootNavigator'
 
 export const SignIn = () => {
@@ -23,9 +23,8 @@ export const SignIn = () => {
     }
 
     return (
-        <DisconnectedLayout>
+        <TitleLayout noFooter title={'Sign In'}>
             <>
-                <Text>Sign in</Text>
                 <TextInput
                     placeholder="Email"
                     value={email}
@@ -41,6 +40,6 @@ export const SignIn = () => {
                 <Button title="Submit" onPress={SignInUser} />
                 <Button title="Register" onPress={() => navigation.navigate('Register')} />
             </>
-        </DisconnectedLayout>
+        </TitleLayout>
     )
 }

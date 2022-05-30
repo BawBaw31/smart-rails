@@ -7,11 +7,13 @@ import { Home } from '../screens/Home/Home'
 import { Loading } from '../screens/Loading/Loading'
 import { Register } from '../screens/Register/Register'
 import { SignIn } from '../screens/SignIn/SignIn'
-import { TestPdf } from '../screens/Pdfs/TestPdf'
+import { WayDevicesPDF } from '../screens/PeriodicVisitsPDF/WayDevicesPDF'
+import { CommonWayPDF } from '../screens/PeriodicVisitsPDF/CommonWayPDF'
 
 export type RouteParams = {
     Home: undefined
-    TestPdf: undefined
+    WayDevicesPDF: undefined
+    CommonWayPDF: undefined
     Loading: undefined
     Register: undefined
     SignIn: undefined
@@ -47,7 +49,8 @@ export const RootNavigator = () => {
             ) : isSignedIn ? (
                 <Stack.Group>
                     <Stack.Screen name="Home" component={Home} />
-                    <Stack.Screen name="TestPdf" component={TestPdf} />
+                    <Stack.Screen name="WayDevicesPDF" component={WayDevicesPDF} />
+                    <Stack.Screen name="CommonWayPDF" component={CommonWayPDF} />
                 </Stack.Group>
             ) : (
                 <Stack.Group>
