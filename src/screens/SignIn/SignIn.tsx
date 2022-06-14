@@ -1,25 +1,23 @@
-import { useNavigation } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { API_URL } from '@env'
 import React, { useState } from 'react'
-import { Button, Text, TextInput } from 'react-native'
+import { Button, TextInput } from 'react-native'
 import { TitleLayout } from '../../components/layouts/Layouts'
-import { auth } from '../../firebase/firebase-setup'
-import { RouteParams } from '../../navigation/RootNavigator'
 
 export const SignIn = () => {
-    const navigation = useNavigation<NativeStackNavigationProp<RouteParams>>()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const SignInUser = () => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then((res) => {
-                console.log(res)
-            })
-            .catch((err) => {
-                alert(err)
-            })
+    const SignInUser = async () => {
+        console.log(`${API_URL}login`)
+        const apiResponse = await fetch(`${API_URL}login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: email, password: password }),
+        })
+        const json = await apiResponse.json()
+        console.log(json)
     }
 
     return (
@@ -38,7 +36,6 @@ export const SignIn = () => {
                 />
 
                 <Button title="Submit" onPress={SignInUser} />
-                <Button title="Register" onPress={() => navigation.navigate('Register')} />
             </>
         </TitleLayout>
     )

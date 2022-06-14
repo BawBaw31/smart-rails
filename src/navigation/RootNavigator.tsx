@@ -1,14 +1,11 @@
-import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { onAuthStateChanged } from 'firebase/auth'
-import { useState } from 'react'
-import { auth } from '../firebase/firebase-setup'
+import React from 'react'
+import { TApiResponse, useApi } from '../hooks/useApi'
 import { Home } from '../screens/Home/Home'
 import { Loading } from '../screens/Loading/Loading'
-import { Register } from '../screens/Register/Register'
-import { SignIn } from '../screens/SignIn/SignIn'
-import { WayDevicesPDF } from '../screens/PeriodicVisitsPDF/WayDevicesPDF'
 import { CommonWayPDF } from '../screens/PeriodicVisitsPDF/CommonWayPDF'
+import { WayDevicesPDF } from '../screens/PeriodicVisitsPDF/WayDevicesPDF'
+import { SignIn } from '../screens/SignIn/SignIn'
 
 export type RouteParams = {
     Home: undefined
@@ -22,18 +19,7 @@ export type RouteParams = {
 const Stack = createNativeStackNavigator<RouteParams>()
 
 export const RootNavigator = () => {
-    const [isLoading, setIsLoading] = useState(true)
-    const [isSignedIn, setIsSignedIn] = useState(false)
-
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            setIsLoading(false)
-            setIsSignedIn(true)
-        } else {
-            setIsLoading(false)
-            setIsSignedIn(false)
-        }
-    })
+    const apiResponse: TApiResponse = useApi('me')
 
     return (
         <Stack.Navigator
@@ -42,11 +28,11 @@ export const RootNavigator = () => {
                 headerShown: false,
             }}
         >
-            {isLoading ? (
+            {apiResponse.loading ? (
                 <Stack.Group>
                     <Stack.Screen name="Loading" component={Loading} />
                 </Stack.Group>
-            ) : isSignedIn ? (
+            ) : apiResponse.status === 200 ? (
                 <Stack.Group>
                     <Stack.Screen name="Home" component={Home} />
                     <Stack.Screen name="WayDevicesPDF" component={WayDevicesPDF} />
@@ -55,7 +41,6 @@ export const RootNavigator = () => {
             ) : (
                 <Stack.Group>
                     <Stack.Screen name="SignIn" component={SignIn} />
-                    <Stack.Screen name="Register" component={Register} />
                 </Stack.Group>
             )}
         </Stack.Navigator>
