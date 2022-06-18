@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { API_URL } from '@env'
+import { apiUrl } from '../config/apiConfig.json'
 
 export type TApiResponse = {
     status: number
@@ -19,7 +19,7 @@ export const useApi = (path: string): TApiResponse => {
     const getAPIData = async () => {
         setLoading(true)
         try {
-            const apiResponse = await fetch(`${API_URL}${path}`)
+            const apiResponse = await fetch(`${apiUrl}${path}`)
             const json = await apiResponse.json()
             setStatus(apiResponse.status)
             setStatusText(apiResponse.statusText)

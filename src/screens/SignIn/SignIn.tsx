@@ -1,15 +1,16 @@
-import { API_URL } from '@env'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Button, TextInput } from 'react-native'
 import { TitleLayout } from '../../components/layouts/Layouts'
+import { apiUrl } from '../../config/apiConfig.json'
+import { UserContext } from '../../contexts/UserContext'
 
 export const SignIn = () => {
+    const { setUser } = useContext(UserContext)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const SignInUser = async () => {
-        console.log(`${API_URL}login`)
-        const apiResponse = await fetch(`${API_URL}login`, {
+        const apiResponse = await fetch(`${apiUrl}login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -17,7 +18,7 @@ export const SignIn = () => {
             body: JSON.stringify({ email: email, password: password }),
         })
         const json = await apiResponse.json()
-        console.log(json)
+        setUser(json.user)
     }
 
     return (

@@ -11,8 +11,11 @@ import {
     Montserrat_700Bold,
     Montserrat_800ExtraBold,
 } from '@expo-google-fonts/montserrat'
+import { UserContext } from './src/contexts/UserContext'
+import { User } from './src/views/User'
 
 export default function App() {
+    const [user, setUser] = React.useState<User | null>(null)
     const [fontsLoaded] = useFonts({
         Montserrat_400Regular,
         Montserrat_500Medium,
@@ -21,14 +24,21 @@ export default function App() {
         Montserrat_800ExtraBold,
     })
 
+    const setUserWithLog = (user: User | null) => {
+        console.log('setUserWithLog :', user)
+        setUser(user)
+    }
+
     if (!fontsLoaded) {
         return <AppLoading />
     } else {
         return (
-            <NavigationContainer>
-                <StatusBar style="auto" />
-                <RootNavigator />
-            </NavigationContainer>
+            <UserContext.Provider value={{ user, setUser: setUserWithLog }}>
+                <NavigationContainer>
+                    <StatusBar style="auto" />
+                    <RootNavigator />
+                </NavigationContainer>
+            </UserContext.Provider>
         )
     }
 }

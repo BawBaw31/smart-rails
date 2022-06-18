@@ -1,11 +1,12 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import React from 'react'
-import { TApiResponse, useApi } from '../hooks/useApi'
+import React, { useContext, useEffect } from 'react'
+import { UserContext } from '../contexts/UserContext'
 import { Home } from '../screens/Home/Home'
 import { Loading } from '../screens/Loading/Loading'
 import { CommonWayPDF } from '../screens/PeriodicVisitsPDF/CommonWayPDF'
 import { WayDevicesPDF } from '../screens/PeriodicVisitsPDF/WayDevicesPDF'
 import { SignIn } from '../screens/SignIn/SignIn'
+import { apiUrl } from '../config/apiConfig.json'
 
 export type RouteParams = {
     Home: undefined
@@ -19,7 +20,23 @@ export type RouteParams = {
 const Stack = createNativeStackNavigator<RouteParams>()
 
 export const RootNavigator = () => {
-    const apiResponse: TApiResponse = useApi('me')
+    const [loading, setLoading] = React.useState(true)
+    const { user, setUser } = useContext(UserContext)
+
+    const checkIfUserIsLogedIn = async () => {
+        try {
+            const apiResponse = await fetch(`${apiUrl}me`)
+            const data = await apiResponse.json()
+            setUser(data.user)
+        } catch (error) {
+            console.log(error)
+        }
+        setLoading(false)
+    }
+
+    useEffect(() => {
+        checkIfUserIsLogedIn()
+    }, [])
 
     return (
         <Stack.Navigator
@@ -28,11 +45,11 @@ export const RootNavigator = () => {
                 headerShown: false,
             }}
         >
-            {apiResponse.loading ? (
+            {loading ? (
                 <Stack.Group>
                     <Stack.Screen name="Loading" component={Loading} />
                 </Stack.Group>
-            ) : apiResponse.status === 200 ? (
+            ) : user ? (
                 <Stack.Group>
                     <Stack.Screen name="Home" component={Home} />
                     <Stack.Screen name="WayDevicesPDF" component={WayDevicesPDF} />
