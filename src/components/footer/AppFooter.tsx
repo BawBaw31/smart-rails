@@ -1,37 +1,35 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import React, { useState } from 'react'
-import PlusIcon from '../../assets/icons/PlusIcon'
+import React, { useContext, useState } from 'react'
+import UserIcon from '../../assets/icons/UserIcon'
+import { backUrl } from '../../config/apiConfig.json'
+import { UserContext } from '../../contexts/UserContext'
 import { RouteParams } from '../../navigation/RootNavigator'
+import { CustomButton } from '../customButton/CustomButton'
 import { CustomModal } from '../modal/CustomModal'
-import { ModalButton, ModalButtonText, ModalTitle } from '../modal/CustomModal.styles'
+import { ModalTitle } from '../modal/CustomModal.styles'
 import * as Styled from './AppFooter.styles'
 
 export const AppFooter = () => {
+    const { setUser } = useContext(UserContext)
     const navigation = useNavigation<NativeStackNavigationProp<RouteParams>>()
     const [modalVisible, setModalVisible] = useState(false)
 
+    const Logout = async () => {
+        try {
+            await fetch(`${backUrl}logout`)
+            setUser(null)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <Styled.AppFooterContainer>
-            <CustomModal icon={<PlusIcon />} hook={[modalVisible, setModalVisible]}>
+            <CustomModal icon={<UserIcon />} hook={[modalVisible, setModalVisible]}>
                 <>
-                    <ModalTitle>Créer un pdf</ModalTitle>
-                    <ModalButton
-                        onPress={() => {
-                            navigation.navigate('WayDevicesPDF')
-                            setModalVisible(!modalVisible)
-                        }}
-                    >
-                        <ModalButtonText>Visite périodique des appareils de voie</ModalButtonText>
-                    </ModalButton>
-                    <ModalButton
-                        onPress={() => {
-                            navigation.navigate('CommonWayPDF')
-                            setModalVisible(!modalVisible)
-                        }}
-                    >
-                        <ModalButtonText>Visite périodique de la voie courante</ModalButtonText>
-                    </ModalButton>
+                    <ModalTitle>User Management</ModalTitle>
+                    <CustomButton text="Logout" onPress={Logout} />
                 </>
             </CustomModal>
         </Styled.AppFooterContainer>

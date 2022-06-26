@@ -1,24 +1,22 @@
-import React, { useContext } from 'react'
-import { Button } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import React from 'react'
+import { FullWidthButton } from '../../components/fullWidthButton/FullWidthButton'
 import { TitleLayout } from '../../components/layouts/Layouts'
-import { UserContext } from '../../contexts/UserContext'
-import { backUrl } from '../../config/apiConfig.json'
+import { RouteParams } from '../../navigation/RootNavigator'
 
 export const Home = () => {
-    const { setUser } = useContext(UserContext)
-    const Logout = async () => {
-        console.log('Logout')
-        try {
-            await fetch(`${backUrl}logout`)
-            setUser(null)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
+    const navigation = useNavigation<NativeStackNavigationProp<RouteParams>>()
     return (
         <TitleLayout title="Home">
-            <Button title="Logout" onPress={Logout} />
+            <>
+                <FullWidthButton
+                    onPress={() => navigation.navigate('NewReport')}
+                    text="New Report"
+                />
+                <FullWidthButton onPress={() => console.log('archives')} text="Archives" />
+                <FullWidthButton onPress={() => console.log('last reports')} text="Last Reports" />
+            </>
         </TitleLayout>
     )
 }

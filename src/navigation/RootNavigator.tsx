@@ -3,18 +3,16 @@ import React, { useContext, useEffect } from 'react'
 import { UserContext } from '../contexts/UserContext'
 import { Home } from '../screens/Home/Home'
 import { Loading } from '../screens/Loading/Loading'
-import { CommonWayPDF } from '../screens/PeriodicVisitsPDF/CommonWayPDF'
-import { WayDevicesPDF } from '../screens/PeriodicVisitsPDF/WayDevicesPDF'
 import { SignIn } from '../screens/SignIn/SignIn'
 import { apiUrl } from '../config/apiConfig.json'
+import { NewReport } from '../screens/NewReport/NewReport'
 
 export type RouteParams = {
-    Home: undefined
-    WayDevicesPDF: undefined
-    CommonWayPDF: undefined
     Loading: undefined
     Register: undefined
     SignIn: undefined
+    Home: undefined
+    NewReport: undefined
 }
 
 const Stack = createNativeStackNavigator<RouteParams>()
@@ -52,8 +50,7 @@ export const RootNavigator = () => {
             ) : user ? (
                 <Stack.Group>
                     <Stack.Screen name="Home" component={Home} />
-                    <Stack.Screen name="WayDevicesPDF" component={WayDevicesPDF} />
-                    <Stack.Screen name="CommonWayPDF" component={CommonWayPDF} />
+                    <Stack.Screen name="NewReport" component={NewReport} />
                 </Stack.Group>
             ) : (
                 <Stack.Group>

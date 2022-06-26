@@ -24,16 +24,11 @@ export default function App() {
         Montserrat_800ExtraBold,
     })
 
-    const setUserWithLog = (user: User | null) => {
-        console.log('setUserWithLog :', user)
-        setUser(user)
-    }
-
     if (!fontsLoaded) {
         return <AppLoading />
     } else {
         return (
-            <UserContext.Provider value={{ user, setUser: setUserWithLog }}>
+            <UserContext.Provider value={{ user, setUser }}>
                 <NavigationContainer>
                     <StatusBar style="auto" />
                     <RootNavigator />

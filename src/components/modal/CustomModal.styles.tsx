@@ -1,4 +1,4 @@
-import { Pressable, Text, TouchableOpacity, View } from 'react-native'
+import { Pressable, Text, View } from 'react-native'
 import { Colors } from 'react-native/Libraries/NewAppScreen'
 import styled from 'styled-components'
 import { Font, Spacing } from '../../styles'
@@ -16,7 +16,7 @@ export const ModalContainer = styled(Pressable)`
 export const Modal = styled(View)`
     background-color: white;
     border-radius: 10px;
-    padding: ${Spacing.xxl} 0 0 0;
+    padding: ${Spacing.xxl};
     align-items: center;
     overflow: hidden;
 `
@@ -25,17 +25,5 @@ export const ModalTitle = styled(Text)`
     margin-bottom: ${Spacing.l};
     color: ${Colors.black};
     font-family: ${Font.montserratSemiBold};
-    font-size: 16px;
-`
-export const ModalButton = styled(TouchableOpacity)`
-    background-color: ${Colors.primary};
-    padding: ${Spacing.m};
-    width: 300px;
-`
-
-export const ModalButtonText = styled(Text)`
-    font-size: 18px;
-    font-family: ${Font.montserratExtrabold};
-    color: ${Colors.white};
-    text-align: center;
+    font-size: 22px;
 `
