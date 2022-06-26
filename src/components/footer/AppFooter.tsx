@@ -1,6 +1,8 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { useContext, useState } from 'react'
+import { TouchableOpacity } from 'react-native'
+import HomeIcon from '../../assets/icons/HomeIcon'
 import UserIcon from '../../assets/icons/UserIcon'
 import { backUrl } from '../../config/apiConfig.json'
 import { UserContext } from '../../contexts/UserContext'
@@ -26,6 +28,9 @@ export const AppFooter = () => {
 
     return (
         <Styled.AppFooterContainer>
+            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                <HomeIcon />
+            </TouchableOpacity>
             <CustomModal icon={<UserIcon />} hook={[modalVisible, setModalVisible]}>
                 <>
                     <ModalTitle>User Management</ModalTitle>

@@ -1,11 +1,12 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React, { useContext, useEffect } from 'react'
+import { Loading } from '../components/loading/Loading'
+import { apiUrl } from '../config/apiConfig.json'
 import { UserContext } from '../contexts/UserContext'
 import { Home } from '../screens/Home/Home'
-import { Loading } from '../screens/Loading/Loading'
-import { SignIn } from '../screens/SignIn/SignIn'
-import { apiUrl } from '../config/apiConfig.json'
 import { NewReport } from '../screens/NewReport/NewReport'
+import { ReportForm } from '../screens/ReportForm/ReportForm'
+import { SignIn } from '../screens/SignIn/SignIn'
 
 export type RouteParams = {
     Loading: undefined
@@ -13,6 +14,7 @@ export type RouteParams = {
     SignIn: undefined
     Home: undefined
     NewReport: undefined
+    ReportForm: { id: number }
 }
 
 const Stack = createNativeStackNavigator<RouteParams>()
@@ -51,6 +53,7 @@ export const RootNavigator = () => {
                 <Stack.Group>
                     <Stack.Screen name="Home" component={Home} />
                     <Stack.Screen name="NewReport" component={NewReport} />
+                    <Stack.Screen name="ReportForm" component={ReportForm} />
                 </Stack.Group>
             ) : (
                 <Stack.Group>

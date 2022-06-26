@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react'
 import { CustomButton } from '../../components/customButton/CustomButton'
+import { FormTextInput } from '../../components/formComponents/FormComponents.styles'
 import { TitleLayout } from '../../components/layouts/Layouts'
 import { apiUrl } from '../../config/apiConfig.json'
 import { UserContext } from '../../contexts/UserContext'
-import * as Styled from './Signin.styles'
 
 export const SignIn = () => {
     const { setUser } = useContext(UserContext)
@@ -25,7 +25,7 @@ export const SignIn = () => {
     return (
         <TitleLayout noFooter title={'Sign In'}>
             <>
-                <Styled.Field
+                <FormTextInput
                     placeholder="Email"
                     value={email}
                     keyboardType="email-address"
@@ -33,7 +33,7 @@ export const SignIn = () => {
                     onChangeText={(text) => setEmail(text)}
                     placeholderTextColor="black"
                 />
-                <Styled.Field
+                <FormTextInput
                     placeholder="Password"
                     value={password}
                     secureTextEntry={true}

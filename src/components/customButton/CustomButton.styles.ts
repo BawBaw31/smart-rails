@@ -6,7 +6,7 @@ export const CustomButtonContainer = styled(View)`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: ${Colors.gray};
+    background-color: ${Colors.secondary};
     border-radius: 10px;
 `
 

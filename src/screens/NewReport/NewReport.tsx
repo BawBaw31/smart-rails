@@ -1,12 +1,27 @@
-import React, { useEffect } from 'react'
+import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import React, { useEffect, useState } from 'react'
+import { FullWidthButton } from '../../components/fullWidthButton/FullWidthButton'
 import { TitleLayout } from '../../components/layouts/Layouts'
+import { Loading } from '../../components/loading/Loading'
 import { apiUrl } from '../../config/apiConfig.json'
-import { Text } from 'react-native'
+import { RouteParams } from '../../navigation/RootNavigator'
+import { ReportType } from '../../views/ReportFetch'
 
 export const NewReport = () => {
-    async function fetchReportTypes() {
-        const apiResponse = await fetch(`${apiUrl}reports`)
-        const json = await apiResponse.json()
+    const navigation = useNavigation<NativeStackNavigationProp<RouteParams>>()
+    const [loading, setLoading] = useState(true)
+    const [reportTypes, setReportTypes] = useState<ReportType[]>([])
+
+    const fetchReportTypes = async () => {
+        try {
+            const apiResponse = await fetch(`${apiUrl}visit/type`)
+            const json = await apiResponse.json()
+            setReportTypes(json)
+        } catch (error) {
+            console.log(error)
+        }
+        setLoading(false)
     }
 
     useEffect(() => {
@@ -14,8 +29,20 @@ export const NewReport = () => {
     }, [])
 
     return (
-        <TitleLayout title="New Report" goBack="Home" noFooter>
-            <Text>Hey</Text>
+        <TitleLayout title="New Report" goBack="Home">
+            {!loading ? (
+                <>
+                    {reportTypes.map((reportType) => (
+                        <FullWidthButton
+                            key={reportType.id}
+                            text={reportType.label}
+                            onPress={() => navigation.navigate('ReportForm', { id: reportType.id })}
+                        />
+                    ))}
+                </>
+            ) : (
+                <Loading />
+            )}
         </TitleLayout>
     )
 }

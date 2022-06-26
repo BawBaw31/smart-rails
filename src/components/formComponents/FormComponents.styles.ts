@@ -15,7 +15,7 @@ export const FormLabel = styled(Text)`
     font-size: ${Spacing.l};
 `
 
-export const Field = styled(TextInput)`
+export const FormTextInput = styled(TextInput)`
     border-color: ${Colors.white};
     width: 100%;
     border-width: ${Spacing.xs};

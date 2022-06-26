@@ -9,5 +9,5 @@ export const AppFooterContainer = styled(View)`
     bottom: 0;
     padding: ${Spacing.l} ${Spacing.xl};
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 `
