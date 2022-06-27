@@ -2,6 +2,7 @@ import { User } from './User'
 
 export interface Report {
     id: number
+    createdAt: string
     visitType: ReportType
     values: ReportValue[]
     writer: User
@@ -22,6 +23,7 @@ export interface Measure {
 }
 
 export interface ReportValue {
-    stringValue: string
-    measureId: number
+    id: number
+    value: number
+    measure: Measure
 }

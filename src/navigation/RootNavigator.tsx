@@ -4,7 +4,9 @@ import { Loading } from '../components/loading/Loading'
 import { apiUrl } from '../config/apiConfig.json'
 import { UserContext } from '../contexts/UserContext'
 import { Home } from '../screens/Home/Home'
+import { MyReports } from '../screens/MyReports/MyReports'
 import { NewReport } from '../screens/NewReport/NewReport'
+import { ReportDetails } from '../screens/ReportDetails/ReportDetails'
 import { ReportForm } from '../screens/ReportForm/ReportForm'
 import { SignIn } from '../screens/SignIn/SignIn'
 
@@ -15,6 +17,8 @@ export type RouteParams = {
     Home: undefined
     NewReport: undefined
     ReportForm: { id: number }
+    MyReports: undefined
+    ReportDetails: { id: number }
 }
 
 const Stack = createNativeStackNavigator<RouteParams>()
@@ -54,6 +58,8 @@ export const RootNavigator = () => {
                     <Stack.Screen name="Home" component={Home} />
                     <Stack.Screen name="NewReport" component={NewReport} />
                     <Stack.Screen name="ReportForm" component={ReportForm} />
+                    <Stack.Screen name="MyReports" component={MyReports} />
+                    <Stack.Screen name="ReportDetails" component={ReportDetails} />
                 </Stack.Group>
             ) : (
                 <Stack.Group>

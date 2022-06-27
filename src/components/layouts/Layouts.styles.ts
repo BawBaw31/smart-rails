@@ -14,7 +14,7 @@ export const PageContainer = styled(View)`
 
 export const PageContent = styled(View)`
     flex: 1;
-    margin: 80px 16px 112px 16px;
+    margin: 80px 16px 80px 16px;
 `
 
 export const KeyboardAvoidingContainer = styled(KeyboardAvoidingView)`

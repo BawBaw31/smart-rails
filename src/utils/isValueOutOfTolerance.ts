@@ -1,4 +1,4 @@
-import { ReportValue } from '../views/ReportPost'
+import { ReportValue } from '../views/ReportFetch'
 
 export const isValueOutOfTolerance = (value: ReportValue) => {
     if (value.measure.theoreticalValue)

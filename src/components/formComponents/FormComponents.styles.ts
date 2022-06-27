@@ -25,3 +25,10 @@ export const FormTextInput = styled(TextInput)`
     margin-bottom: ${Spacing.xl};
     background-color: ${Colors.white};
 `
+
+export const FormError = styled(Text)`
+    color: ${Colors.error};
+    margin-bottom: ${Spacing.s};
+    text-align: center;
+    font-family: ${Font.montserratMedium};
+`

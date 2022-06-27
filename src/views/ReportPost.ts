@@ -1,4 +1,4 @@
-import { Measure, ReportType } from './ReportFetch'
+import { ReportType } from './ReportFetch'
 import { User } from './User'
 
 export interface Report {
@@ -9,7 +9,6 @@ export interface Report {
 }
 
 export interface ReportValue {
-    stringValue: string
-    value: number
-    measure: Measure
+    value: string
+    measureId: number
 }

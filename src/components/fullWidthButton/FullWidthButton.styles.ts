@@ -17,4 +17,5 @@ export const FullWidthButtonLabel = styled(Text)`
     padding: 32px 16px;
     font-family: ${Font.montserratExtrabold};
     color: ${Colors.white};
+    text-align: center;
 `
